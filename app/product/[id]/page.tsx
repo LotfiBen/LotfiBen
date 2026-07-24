@@ -8,8 +8,9 @@ import { useState } from 'react';
 import { useCart } from '@/lib/cart-context';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
-import { ChevronRight, Check, Heart, Share2, ArrowLeft } from 'lucide-react';
+import { Check, Heart, Share2, ArrowLeft } from 'lucide-react';
 import { Suspense } from 'react';
+import { formatPrice } from '@/lib/settings';
 
 function ProductDetailContent() {
   const params = useParams();
@@ -22,9 +23,9 @@ function ProductDetailContent() {
   if (!product) {
     return (
       <div className="pt-20 pb-16 px-4 text-center bg-brand-ivory min-h-screen">
-        <h1 className="text-2xl font-bold text-brand-midnight">Product Not Found</h1>
+        <h1 className="text-2xl font-bold text-brand-midnight">Produit non trouvé</h1>
         <Link href="/products" className="btn-primary inline-block mt-4 text-sm">
-          Back to Shop
+          Retour à la boutique
         </Link>
       </div>
     );
@@ -44,7 +45,7 @@ function ProductDetailContent() {
       <div className="px-4 py-3 border-b border-brand-bone">
         <Link href="/products" className="inline-flex items-center gap-1 text-sm text-brand-mist hover:text-brand-midnight">
           <ArrowLeft className="w-4 h-4" />
-          Back to Shop
+          Retour à la boutique
         </Link>
       </div>
 
@@ -70,7 +71,7 @@ function ProductDetailContent() {
                     selectedImage === idx ? 'border-brand-ember' : 'border-transparent'
                   }`}
                 >
-                  <Image src={img} alt={`View ${idx + 1}`} fill className="object-cover" />
+                  <Image src={img} alt={`Vue ${idx + 1}`} fill className="object-cover" />
                 </button>
               ))}
             </div>
@@ -79,13 +80,18 @@ function ProductDetailContent() {
 
         {/* Product Info */}
         <div className="mt-6">
-          <span className="category-pill rounded-full">{product.category.replace('-', ' ')}</span>
+          <span className="category-pill rounded-full">
+            {product.category === 't-shirt' && 'T-Shirt'}
+            {product.category === 'hoodie' && 'Hoodie'}
+            {product.category === 'sweatshirt' && 'Sweatshirt'}
+            {product.category === 'tank-top' && 'Débardeur'}
+          </span>
           
           <h1 className="section-title text-2xl md:text-3xl text-brand-midnight mt-3">
             {product.name}
           </h1>
           
-          <p className="price text-2xl mt-2">${product.price.toFixed(2)}</p>
+          <p className="price text-2xl mt-2">{formatPrice(product.price)}</p>
           
           <p className="text-brand-mist text-sm mt-4 leading-relaxed">
             {product.description}
@@ -94,7 +100,7 @@ function ProductDetailContent() {
           {/* Color Selection */}
           <div className="mt-6">
             <p className="text-sm font-semibold text-brand-midnight mb-2">
-              Color: <span className="font-normal text-brand-mist">{selectedColor}</span>
+              Couleur: <span className="font-normal text-brand-mist">{selectedColor}</span>
             </p>
             <div className="flex flex-wrap gap-2">
               {product.colors.map(color => (
@@ -117,9 +123,9 @@ function ProductDetailContent() {
           <div className="mt-6">
             <div className="flex justify-between items-center mb-2">
               <p className="text-sm font-semibold text-brand-midnight">
-                Size: <span className="font-normal text-brand-mist">{selectedSize}</span>
+                Taille: <span className="font-normal text-brand-mist">{selectedSize}</span>
               </p>
-              <button className="text-xs text-brand-ember underline">Size Guide</button>
+              <button className="text-xs text-brand-ember underline">Guide des tailles</button>
             </div>
             <div className="grid grid-cols-4 gap-2">
               {product.sizes.map(size => (
@@ -143,18 +149,18 @@ function ProductDetailContent() {
             onClick={handleAddToCart}
             className="w-full btn-primary mt-6 text-sm"
           >
-            Add to Cart
+            Ajouter au panier
           </button>
 
           {/* Wishlist & Share */}
           <div className="flex gap-3 mt-3">
             <button className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-brand-bone rounded-xl text-sm font-semibold hover:bg-brand-bone transition-colors">
               <Heart className="w-4 h-4" />
-              Wishlist
+              Favoris
             </button>
             <button className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-brand-bone rounded-xl text-sm font-semibold hover:bg-brand-bone transition-colors">
               <Share2 className="w-4 h-4" />
-              Share
+              Partager
             </button>
           </div>
 
@@ -162,15 +168,19 @@ function ProductDetailContent() {
           <div className="mt-6 space-y-2 text-sm">
             <p className="flex items-center gap-2 text-brand-mist">
               <Check className="w-4 h-4 text-green-500" />
-              Free shipping on orders over $75
+              Livraison gratuite dès 10.000 د.ج
             </p>
             <p className="flex items-center gap-2 text-brand-mist">
               <Check className="w-4 h-4 text-green-500" />
-              100% organic cotton
+              Coton organique 100%
             </p>
             <p className="flex items-center gap-2 text-brand-mist">
               <Check className="w-4 h-4 text-green-500" />
-              30-day easy returns
+              Retours faciles sous 14 jours
+            </p>
+            <p className="flex items-center gap-2 text-brand-mist">
+              <Check className="w-4 h-4 text-green-500" />
+              Paiement à la livraison disponible
             </p>
           </div>
         </div>
@@ -178,7 +188,7 @@ function ProductDetailContent() {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="mt-10">
-            <h2 className="section-title text-xl text-brand-midnight mb-4">You May Also Like</h2>
+            <h2 className="section-title text-xl text-brand-midnight mb-4">Vous aimerez aussi</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {relatedProducts.map((p, index) => (
                 <ProductCard key={p.id} product={p} index={index} />

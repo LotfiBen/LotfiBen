@@ -1,112 +1,113 @@
-# ORIGINL - Premium Print on Demand Store
+# ORIGINL - Mode Streetwear Premium 🇩🇿
 
-A modern e-commerce website for ORIGINL, a premium print-on-demand clothing brand.
+Une boutique en ligne moderne pour ORIGINL, une marque algérienne de vêtements streetwear premium.
 
-## Features
+## 🇩🇿 Basé en Algérie
 
-- 🛍️ **Full Product Catalog** - Browse t-shirts, hoodies, sweatshirts, and tank tops
-- 🛒 **Shopping Cart** - Add items with color and size selection
-- 💳 **Checkout Flow** - Complete purchase with shipping and payment forms
-- 📱 **Responsive Design** - Mobile-first, works on all devices
-- ⚡ **Fast Performance** - Built with Next.js 14 for optimal speed
-- 🎨 **Beautiful Animations** - Smooth transitions and micro-interactions
+- **Devise:** Dinar Algérien (DZD)
+- **Langue:** Français
+- **Modes de paiement:** 
+  - Paiement à la livraison (COD)
+  - CCP / BaridiMob
+  - Edahabia
+  - Virement bancaire
+- **Livraison:** Partout en Algérie (3-5 jours)
+- **Livraison gratuite:** Dès 10.000 د.ج
 
-## Tech Stack
+## Fonctionnalités
+
+- 🛍️ **Catalogue Complet** - T-shirts, hoodies, sweatshirts, débardeurs
+- 🛒 **Panier** - Ajouter avec sélection couleur et taille
+- 💳 **Commande** - Formulaire complet avec adresse et paiement
+- 📱 **Design Responsive** - Optimisé mobile (iPhone, Android)
+- 🇩🇿 **Localization** - Prix en DZD, interface en français
+
+## Stack Technique
 
 - **Framework:** Next.js 14 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
+- **Langage:** TypeScript
+- **Styles:** Tailwind CSS
 - **Animations:** Framer Motion
-- **Icons:** Lucide React
+- **Icônes:** Lucide React
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm or yarn
-
-### Installation
+## Pour Commencer
 
 ```bash
-# Install dependencies
+# Installer les dépendances
 npm install
 
-# Run development server
+# Lancer le serveur de développement
 npm run dev
 
-# Build for production
+# Build pour production
 npm run build
 
-# Start production server
+# Démarrer le serveur de production
 npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the store.
+Ouvrez [http://localhost:3000](http://localhost:3000) pour voir la boutique.
 
-## Project Structure
+## Structure du Projet
 
 ```
 ├── app/
-│   ├── layout.tsx          # Root layout with providers
-│   ├── page.tsx            # Home page
-│   ├── globals.css        # Global styles
+│   ├── layout.tsx          # Layout avec providers
+│   ├── page.tsx            # Page d'accueil
+│   ├── globals.css        # Styles globaux
 │   ├── products/
-│   │   └── page.tsx        # Products catalog
+│   │   └── page.tsx        # Catalogue produits
 │   ├── product/
 │   │   └── [id]/
-│   │       └── page.tsx    # Product detail page
+│   │       └── page.tsx    # Détail produit
 │   └── checkout/
-│       └── page.tsx        # Checkout page
+│       └── page.tsx        # Page commande
 ├── components/
-│   ├── Navbar.tsx          # Navigation with cart
-│   ├── Footer.tsx          # Site footer
-│   ├── Hero.tsx            # Homepage hero section
-│   ├── ProductCard.tsx     # Product grid card
-│   └── CartDrawer.tsx      # Sliding cart drawer
+│   ├── Navbar.tsx          # Navigation
+│   ├── Footer.tsx          # Pied de page
+│   ├── Hero.tsx            # Section héro
+│   ├── ProductCard.tsx     # Carte produit
+│   └── CartDrawer.tsx      # Panneau panier
 ├── lib/
-│   ├── types.ts            # TypeScript interfaces
-│   ├── products.ts         # Product data
-│   └── cart-context.tsx    # Cart state management
-├── public/                  # Static assets
+│   ├── types.ts            # Types TypeScript
+│   ├── products.ts         # Données produits
+│   ├── settings.ts         # Paramètres boutique
+│   └── cart-context.tsx    # Gestion du panier
 └── package.json
 ```
 
-## Product Categories
+## Conversion de Prix
 
-- **T-Shirts** - Classic tees, vintage washes, long sleeves
-- **Hoodies** - Oversized, zip-up, and crop styles
-- **Sweatshirts** - Essential crewnecks
-- **Tank Tops** - Performance and casual styles
+Les prix sont stockés en USD et convertis en DZD:
+- Taux: ~1 USD = 135 DZD
+- Exemple: 35 USD = 4.725 DZD
 
-## Customization
+## Personnalisation
 
-### Adding Products
+### Modifier les Paramètres
 
-Edit `lib/products.ts` to add or modify products:
+Éditez `lib/settings.ts` pour changer:
+- Taux de conversion devise
+- Seuil livraison gratuite
+- Informations de contact
+- Modes de paiement
 
+### Ajouter des Produits
+
+Éditez `lib/products.ts`:
 ```typescript
 {
-  id: 'unique-id',
-  name: 'Product Name',
-  price: 49.99,
-  category: 't-shirt', // or 'hoodie', 'sweatshirt', 'tank-top'
-  description: 'Product description...',
-  colors: ['Black', 'White'],
+  id: 'nouveau-produit',
+  name: 'ORIGINL Nouveau Tee',
+  price: 39.99, // Prix en USD
+  category: 't-shirt',
+  description: 'Description du produit...',
+  colors: ['Noir', 'Blanc', 'Gris'],
   sizes: ['S', 'M', 'L', 'XL'],
   images: ['https://...'],
-  featured: true, // optional - shows on homepage
 }
 ```
 
-### Connecting to a Real Backend
+## Licence
 
-The current implementation uses local state. To connect to a real backend (Shopify, Stripe, etc.), update the following:
-
-1. **Cart Context** (`lib/cart-context.tsx`) - Replace local state with API calls
-2. **Product Data** (`lib/products.ts`) - Fetch from your product API
-3. **Checkout** (`app/checkout/page.tsx`) - Integrate with your payment provider
-
-## License
-
-Private - All rights reserved © ORIGINL
+Propriétaire - Tous droits réservés © ORIGINL

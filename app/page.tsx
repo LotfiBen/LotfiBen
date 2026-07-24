@@ -11,20 +11,20 @@ export default function Home() {
     <>
       <Hero />
 
-      {/* Featured Products - Mobile Optimized */}
+      {/* Featured Products */}
       <section className="py-12 md:py-20 px-4 bg-brand-ivory">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-8">
             <span className="text-brand-ember text-xs font-bold tracking-widest uppercase">
-              Best Sellers
+              Meilleures ventes
             </span>
             <h2 className="section-title text-3xl md:text-5xl text-brand-midnight mt-2">
-              Featured
+              En Vedette
             </h2>
           </div>
 
-          {/* Products Grid - Mobile 2 cols, Tablet 3-4 cols */}
+          {/* Products Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {featuredProducts.map((product, index) => (
               <ProductCard key={product.id} product={product} index={index} />
@@ -37,25 +37,25 @@ export default function Home() {
               href="/products"
               className="btn-outline inline-flex items-center gap-2 text-sm"
             >
-              View All Products
+              Voir tous les produits
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Category Grid - Mobile Stack, Desktop Row */}
+      {/* Category Grid */}
       <section className="bg-brand-midnight text-white py-12 md:py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="section-title text-3xl md:text-5xl">Shop by Category</h2>
+            <h2 className="section-title text-3xl md:text-5xl">Parcourir par Catégorie</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { name: 'Tees', emoji: '👕', desc: 'Essential fits', category: 't-shirt' },
-              { name: 'Hoodies', emoji: '🧥', desc: 'Street vibes', category: 'hoodie' },
-              { name: 'More', emoji: '✨', desc: 'Explore all', category: 'all' },
+              { name: 'T-Shirts', emoji: '👕', desc: 'Essentiels absolus', category: 't-shirt' },
+              { name: 'Hoodies', emoji: '🧥', desc: 'Vibes streetwear', category: 'hoodie' },
+              { name: 'Plus', emoji: '✨', desc: 'Explorer tout', category: 'all' },
             ].map((cat, i) => (
               <Link
                 key={i}
@@ -71,22 +71,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Brand Story - Mobile Optimized */}
+      {/* Brand Story */}
       <section className="py-12 md:py-20 px-4 bg-brand-ivory">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <span className="text-brand-ember text-xs font-bold tracking-widest uppercase">
-                Our Story
+                Notre Histoire
               </span>
               <h2 className="section-title text-3xl md:text-5xl text-brand-midnight mt-2 mb-4">
-                Born to Be <span className="text-brand-ember">Original</span>
+                né pour être <span className="text-brand-ember">Original</span>
               </h2>
               <p className="text-brand-mist leading-relaxed mb-6">
-                ORIGINL was born from a simple belief: everyone deserves to express themselves without compromise. We create premium streetwear that lets you wear your identity, not just follow trends.
+                ORIGINL est né d&apos;une croyance simple: tout le monde mérite de s&apos;exprimer sans compromis. Nous créons des vêtements streetwear premium qui vous permettent de porter votre identité.
               </p>
               <p className="text-brand-mist leading-relaxed">
-                Every piece is crafted with care, using organic materials and ethical production. Because looking good should feel good too.
+                Chaque pièce est conçue avec soin, en utilisant des matières organiques et une production éthique. Parce que bien paraître devrait aussi bien se sentir.
               </p>
             </div>
             <div className="bg-brand-bone rounded-3xl aspect-square flex items-center justify-center">
@@ -96,25 +96,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features - Mobile Optimized */}
+      {/* Features */}
       <section className="bg-brand-bone py-12 md:py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 icon: <Leaf className="w-6 h-6" />,
-                title: 'Sustainable',
-                desc: 'Organic cotton & eco-friendly production.',
+                title: 'Éco-responsable',
+                desc: 'Coton organique & production respectueuse.',
               },
               {
                 icon: <Truck className="w-6 h-6" />,
-                title: 'Free Shipping',
-                desc: 'On orders over $75. Fast delivery.',
+                title: 'Livraison Gratuite',
+                desc: 'Dès 10.000 د.ج en Algérie.',
               },
               {
                 icon: <RefreshCw className="w-6 h-6" />,
-                title: 'Easy Returns',
-                desc: '30-day hassle-free returns.',
+                title: 'Retours Faciles',
+                desc: 'Retours gratuits sous 14 jours.',
               },
             ].map((feature, i) => (
               <div key={i} className="bg-white rounded-2xl p-5 text-center">
@@ -129,27 +129,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Newsletter - Mobile Optimized */}
+      {/* Newsletter */}
       <section className="py-12 md:py-20 px-4 bg-brand-ivory">
         <div className="max-w-xl mx-auto text-center">
           <h2 className="section-title text-2xl md:text-4xl text-brand-midnight mb-3">
-            Join the Movement
+            Rejoignez le Mouvement
           </h2>
           <p className="text-brand-mist mb-6 text-sm md:text-base">
-            Get early access to drops, exclusive offers, and more.
+            Accès anticipé aux nouveautés, offres exclusives et plus encore.
           </p>
           <form className="flex flex-col sm:flex-row gap-2">
             <input
               type="email"
-              placeholder="Your email"
+              placeholder="Votre email"
               className="flex-1 px-4 py-3 border-2 border-brand-bone rounded-xl bg-white focus:border-brand-ember transition-colors text-sm"
               required
             />
             <button type="submit" className="btn-primary text-sm">
-              Subscribe
+              S&apos;inscrire
             </button>
           </form>
-          <p className="text-xs text-brand-mist mt-3">No spam. Unsubscribe anytime.</p>
+          <p className="text-xs text-brand-mist mt-3">Pas de spam. Désabonnement à tout moment.</p>
         </div>
       </section>
     </>

@@ -6,8 +6,8 @@ export const products: Product[] = [
     name: 'ORIGINL Classic Tee',
     price: 34.99,
     category: 't-shirt',
-    description: 'Our signature tee made from 100% organic cotton. Features a relaxed fit and premium feel. The perfect canvas for your expression.',
-    colors: ['Black', 'White', 'Gray'],
+    description: 'Notre tee signature en coton organique 100%. Coupe relaxée et toucher premium. Le support parfait pour votre expression.',
+    colors: ['Noir', 'Blanc', 'Gris'],
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     images: [
       'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800',
@@ -20,8 +20,8 @@ export const products: Product[] = [
     name: 'ORIGINL Oversized Hoodie',
     price: 74.99,
     category: 'hoodie',
-    description: 'Cozy up in our premium oversized hoodie. Features a kangaroo pocket, ribbed cuffs, and a soft fleece interior for maximum comfort.',
-    colors: ['Black', 'Navy', 'Charcoal'],
+    description: 'Raffinez-vous dans notre hoodie oversized premium. Poche kangourou, bordures côtelées et intérieur en polaire douce pour un confort maximal.',
+    colors: ['Noir', 'Navy', 'Anthracite'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     images: [
       'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800',
@@ -31,11 +31,11 @@ export const products: Product[] = [
   },
   {
     id: '3',
-    name: 'ORIGINL Essential Sweatshirt',
+    name: 'ORIGINL Sweatshirt Essentiel',
     price: 54.99,
     category: 'sweatshirt',
-    description: 'A wardrobe staple reimagined. This sweatshirt combines classic style with modern comfort. Perfect for layering or wearing solo.',
-    colors: ['Black', 'Cream', 'Olive'],
+    description: 'Un essentiel de garde-robe réinventé. Ce sweatshirt combine style classique et confort moderne. Parfait pour superposer ou porter seul.',
+    colors: ['Noir', 'Crème', 'Olive'],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     images: [
       'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=800',
@@ -45,11 +45,11 @@ export const products: Product[] = [
   },
   {
     id: '4',
-    name: 'ORIGINL Tank Top',
+    name: 'ORIGINL Débardeur',
     price: 29.99,
     category: 'tank-top',
-    description: 'Stay cool and stylish with our performance tank. Features a modern cut with dropped armholes for maximum mobility.',
-    colors: ['White', 'Black', 'Sage'],
+    description: 'Restez au frais et stylé avec notre débardeur performance. Coupe moderne avec emmanchures tombantes pour une mobilité maximale.',
+    colors: ['Blanc', 'Noir', 'Sauge'],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     images: [
       'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=800',
@@ -58,11 +58,11 @@ export const products: Product[] = [
   },
   {
     id: '5',
-    name: 'ORIGINL Vintage Wash Tee',
+    name: 'ORIGINL Tee Vintage',
     price: 39.99,
     category: 't-shirt',
-    description: 'A vintage-inspired tee with a worn-in feel. Each piece is garment-dyed for a unique, lived-in look that gets better with time.',
-    colors: ['Faded Black', 'Washed Blue', 'Dusty Rose'],
+    description: 'Un tee inspiré vintage avec un toucher usé. Chaque pièce est teinte en garment pour un look unique, porté qui s\'améliore avec le temps.',
+    colors: ['Noir Délavé', 'Bleu Lavé', 'Rose Poudré'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     images: [
       'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800',
@@ -74,8 +74,8 @@ export const products: Product[] = [
     name: 'ORIGINL Zip Hoodie',
     price: 84.99,
     category: 'hoodie',
-    description: 'Our full-zip hoodie for those who prefer easy on-and-off. Features the same premium quality as our classic pullover.',
-    colors: ['Black', 'Gray', 'Forest'],
+    description: 'Notre hoodie zip complet pour ceux qui préfèrent l\'enfilage facile. Même qualité premium que notre pullover classique.',
+    colors: ['Noir', 'Gris', 'Forêt'],
     sizes: ['S', 'M', 'L', 'XL'],
     images: [
       'https://images.unsplash.com/photo-1578681994506-b8f463449011?w=800',
@@ -87,8 +87,8 @@ export const products: Product[] = [
     name: 'ORIGINL Crop Hoodie',
     price: 64.99,
     category: 'hoodie',
-    description: 'Make a statement with our trendy crop hoodie. Perfect for showing off your style while staying cozy.',
-    colors: ['Black', 'Lavender', 'Mint'],
+    description: 'Faites une déclaration avec notre crop hoodie tendance. Parfait pour montrer votre style tout en restant confortable.',
+    colors: ['Noir', 'Lavande', 'Menthe'],
     sizes: ['XS', 'S', 'M', 'L'],
     images: [
       'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800',
@@ -97,11 +97,11 @@ export const products: Product[] = [
   },
   {
     id: '8',
-    name: 'ORIGINL Long Sleeve',
+    name: 'ORIGINL Manche Longue',
     price: 44.99,
     category: 't-shirt',
-    description: 'The perfect transition piece. Our long sleeve tee offers all-day comfort with a polished, versatile look.',
-    colors: ['White', 'Black', 'Burgundy'],
+    description: 'La pièce de transition parfaite. Notre manche longue offre un confort toute la journée avec un look polyvalent et élégant.',
+    colors: ['Blanc', 'Noir', 'Bordeaux'],
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     images: [
       'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=800',

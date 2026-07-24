@@ -9,11 +9,11 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 const categories = [
-  { id: 'all', label: 'All' },
-  { id: 't-shirt', label: 'Tees' },
+  { id: 'all', label: 'Tout' },
+  { id: 't-shirt', label: 'T-Shirts' },
   { id: 'hoodie', label: 'Hoodies' },
   { id: 'sweatshirt', label: 'Sweats' },
-  { id: 'tank-top', label: 'Tanks' },
+  { id: 'tank-top', label: 'Débardeurs' },
 ];
 
 function ProductsContent() {
@@ -44,14 +44,14 @@ function ProductsContent() {
               <span className="text-white">L</span>
             </h1>
             <p className="text-brand-mist mt-2 text-sm md:text-base">
-              {filteredProducts.length} products
+              {filteredProducts.length} produits
             </p>
           </motion.div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-6">
-        {/* Horizontal Scroll Category Filter - Mobile Optimized */}
+        {/* Category Filter */}
         <div className="flex gap-2 overflow-x-auto pb-4 -mx-4 px-4 md:overflow-visible md:flex-wrap md:mx-0 md:px-0 scrollbar-hide">
           {categories.map((cat) => (
             <button
@@ -68,7 +68,7 @@ function ProductsContent() {
           ))}
         </div>
 
-        {/* Products Grid - Mobile 2 cols */}
+        {/* Products Grid */}
         {filteredProducts.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mt-6">
             {filteredProducts.map((product, index) => (
@@ -77,12 +77,12 @@ function ProductsContent() {
           </div>
         ) : (
           <div className="text-center py-16">
-            <p className="text-brand-mist">No products found.</p>
+            <p className="text-brand-mist">Aucun produit trouvé.</p>
             <button
               onClick={() => setActiveCategory('all')}
               className="btn-primary mt-4 text-sm"
             >
-              View All
+              Voir tout
             </button>
           </div>
         )}
@@ -97,7 +97,7 @@ export default function ProductsPage() {
       <div className="pt-16 bg-brand-ivory min-h-screen">
         <div className="bg-brand-midnight text-white py-10 px-4">
           <div className="max-w-7xl mx-auto">
-            <h1 className="section-title text-4xl">SHOP</h1>
+            <h1 className="section-title text-4xl">BOUTIQUE</h1>
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 py-6">

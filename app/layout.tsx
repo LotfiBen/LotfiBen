@@ -5,8 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "ORIGINL | Premium Print on Demand",
-  description: "Discover unique, high-quality print-on-demand apparel at ORIGINL. Express yourself with our curated collection of tees, hoodies, and more.",
+  title: "ORIGINL | Mode Streetwear Premium - Algérie 🇩🇿",
+  description: "Découvrez ORIGINL, votre destination pour des vêtements streetwear premium en Algérie. T-shirts, hoodies, sweatshirts de qualité avec livraison partout en Algérie.",
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body className="font-sans antialiased">
         <CartProvider>
           <Navbar />

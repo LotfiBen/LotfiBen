@@ -31,10 +31,10 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 bg-brand-ember/10 text-brand-ember px-4 py-2 rounded-full mb-6"
               >
                 <Sparkles className="w-4 h-4" />
-                <span className="text-xs font-bold tracking-wider uppercase">New Season 2026</span>
+                <span className="text-xs font-bold tracking-wider uppercase">Nouvelle Collection 2026</span>
               </motion.div>
 
-              {/* New Logo Typography */}
+              {/* Logo Typography */}
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -56,10 +56,10 @@ export default function Hero() {
                 transition={{ delay: 0.4 }}
                 className="text-base md:text-lg text-brand-mist mb-8 max-w-md leading-relaxed"
               >
-                Premium streetwear that speaks your language. Bold designs for those who refuse to blend in.
+                Vêtements streetwear premium qui parlent votre language. Designs audacieux pour ceux qui refusent de se fondre dans la masse.
               </motion.p>
 
-              {/* CTA Buttons - Mobile Full Width */}
+              {/* CTA Buttons */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -70,18 +70,18 @@ export default function Hero() {
                   href="/products"
                   className="btn-primary text-center flex items-center justify-center gap-2"
                 >
-                  Shop Now
+                  Shopper Maintenant
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/products?category=hoodie"
                   className="btn-outline text-center"
                 >
-                  New Arrivals
+                  Nouveautés
                 </Link>
               </motion.div>
 
-              {/* Trust Indicators - Mobile Optimized */}
+              {/* Trust Indicators */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -90,20 +90,24 @@ export default function Hero() {
               >
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🌱</span>
-                  <span className="text-xs font-semibold text-brand-slate">100% Organic</span>
+                  <span className="text-xs font-semibold text-brand-slate">100% Organique</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🚚</span>
-                  <span className="text-xs font-semibold text-brand-slate">Free $75+</span>
+                  <span className="text-xs font-semibold text-brand-slate">Livraison Gratuite</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">↩️</span>
-                  <span className="text-xs font-semibold text-brand-slate">30-Day Returns</span>
+                  <span className="text-xs font-semibold text-brand-slate">Retours 14 jours</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">🇩🇿</span>
+                  <span className="text-xs font-semibold text-brand-slate">Made in Algeria</span>
                 </div>
               </motion.div>
             </motion.div>
 
-            {/* Hero Visual - Mobile Optimized */}
+            {/* Hero Visual */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -123,7 +127,7 @@ export default function Hero() {
                       🔥
                     </div>
                     <div>
-                      <p className="font-bold text-sm text-brand-midnight">Best Seller</p>
+                      <p className="font-bold text-sm text-brand-midnight">Meilleur Vendeur</p>
                       <p className="text-xs text-brand-mist">Oversized Hoodie</p>
                     </div>
                   </div>
