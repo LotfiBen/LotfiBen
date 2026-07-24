@@ -11,161 +11,145 @@ export default function Home() {
     <>
       <Hero />
 
-      {/* Featured Products */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-originl-cream">
-        <div className="text-center mb-16">
-          <span className="text-originl-terracotta text-sm font-semibold tracking-widest uppercase">
-            Best Sellers
-          </span>
-          <h2 className="text-5xl md:text-6xl font-black tracking-tight text-originl-black mt-3">
-            FEATURED
-          </h2>
-          <div className="section-divider mx-auto mt-6" />
-          <p className="text-originl-charcoal/70 max-w-xl mx-auto mt-6">
-            Our most loved pieces, chosen by customers who appreciate quality, comfort, and style.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 stagger-children">
-          {featuredProducts.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
-          ))}
-        </div>
-        <div className="text-center mt-16">
-          <Link
-            href="/products"
-            className="btn-primary inline-flex items-center gap-2"
-          >
-            View All Products
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+      {/* Featured Products - Mobile Optimized */}
+      <section className="py-12 md:py-20 px-4 bg-brand-ivory">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-8">
+            <span className="text-brand-ember text-xs font-bold tracking-widest uppercase">
+              Best Sellers
+            </span>
+            <h2 className="section-title text-3xl md:text-5xl text-brand-midnight mt-2">
+              Featured
+            </h2>
+          </div>
+
+          {/* Products Grid - Mobile 2 cols, Tablet 3-4 cols */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {featuredProducts.map((product, index) => (
+              <ProductCard key={product.id} product={product} index={index} />
+            ))}
+          </div>
+
+          {/* View All Button */}
+          <div className="text-center mt-8">
+            <Link
+              href="/products"
+              className="btn-outline inline-flex items-center gap-2 text-sm"
+            >
+              View All Products
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Category Banner */}
-      <section className="bg-originl-black text-white py-24 px-4 sm:px-6 lg:px-8">
+      {/* Category Grid - Mobile Stack, Desktop Row */}
+      <section className="bg-brand-midnight text-white py-12 md:py-20 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="text-center mb-8">
+            <h2 className="section-title text-3xl md:text-5xl">Shop by Category</h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { name: 'Tees', emoji: '👕', desc: 'Essential wardrobe staples', category: 't-shirt' },
-              { name: 'Hoodies', emoji: '🧥', desc: 'Cozy streetwear vibes', category: 'hoodie' },
-              { name: 'More', emoji: '✨', desc: 'Sweatshirts, tanks & more', category: 'all' },
+              { name: 'Tees', emoji: '👕', desc: 'Essential fits', category: 't-shirt' },
+              { name: 'Hoodies', emoji: '🧥', desc: 'Street vibes', category: 'hoodie' },
+              { name: 'More', emoji: '✨', desc: 'Explore all', category: 'all' },
             ].map((cat, i) => (
               <Link
                 key={i}
                 href={cat.category === 'all' ? '/products' : `/products?category=${cat.category}`}
-                className="group relative overflow-hidden rounded-2xl p-10 bg-originl-charcoal hover:bg-originl-terracotta transition-all duration-500"
+                className="group bg-brand-slate rounded-2xl p-6 md:p-8 text-center hover:bg-brand-ember transition-colors"
               >
-                <div className="relative z-10">
-                  <span className="text-6xl mb-4 block">{cat.emoji}</span>
-                  <h3 className="text-3xl font-black tracking-tight mb-2">{cat.name}</h3>
-                  <p className="text-white/70 group-hover:text-white/90 transition-colors">{cat.desc}</p>
-                  <div className="mt-6 flex items-center gap-2 text-sm font-semibold">
-                    <span>Shop Now</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                  </div>
-                </div>
-                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-all" />
+                <span className="text-5xl md:text-6xl block mb-4">{cat.emoji}</span>
+                <h3 className="section-title text-xl md:text-2xl mb-1">{cat.name}</h3>
+                <p className="text-sm text-white/60 group-hover:text-white/80">{cat.desc}</p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Brand Story */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-originl-cream">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="order-2 lg:order-1">
-            <span className="text-originl-terracotta text-sm font-semibold tracking-widest uppercase">
-              Our Story
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-originl-black mt-3 mb-6">
-              BORN TO BE <span className="text-originl-terracotta">ORIGINAL</span>
-            </h2>
-            <p className="text-originl-charcoal/80 leading-relaxed mb-6">
-              ORIGINL was born from a simple belief: everyone deserves to express themselves without compromise. We create premium streetwear that lets you wear your identity, not just follow trends.
-            </p>
-            <p className="text-originl-charcoal/80 leading-relaxed mb-8">
-              Every piece is crafted with care, using organic materials and ethical production. Because looking good should feel good too.
-            </p>
-            <Link
-              href="#"
-              className="inline-flex items-center gap-2 text-originl-terracotta font-semibold hover:gap-4 transition-all"
-            >
-              Learn more about our mission
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          <div className="order-1 lg:order-2">
-            <div className="bg-originl-sand aspect-square rounded-3xl flex items-center justify-center relative overflow-hidden">
-              <span className="text-[20rem] md:text-[25rem] font-black text-originl-black/5 select-none">O</span>
-              <div className="absolute inset-0 bg-gradient-to-br from-originl-terracotta/10 to-transparent" />
+      {/* Brand Story - Mobile Optimized */}
+      <section className="py-12 md:py-20 px-4 bg-brand-ivory">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <span className="text-brand-ember text-xs font-bold tracking-widest uppercase">
+                Our Story
+              </span>
+              <h2 className="section-title text-3xl md:text-5xl text-brand-midnight mt-2 mb-4">
+                Born to Be <span className="text-brand-ember">Original</span>
+              </h2>
+              <p className="text-brand-mist leading-relaxed mb-6">
+                ORIGINL was born from a simple belief: everyone deserves to express themselves without compromise. We create premium streetwear that lets you wear your identity, not just follow trends.
+              </p>
+              <p className="text-brand-mist leading-relaxed">
+                Every piece is crafted with care, using organic materials and ethical production. Because looking good should feel good too.
+              </p>
+            </div>
+            <div className="bg-brand-bone rounded-3xl aspect-square flex items-center justify-center">
+              <span className="logo-text text-[10rem] md:text-[14rem] text-brand-midnight/5">O</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="bg-originl-sand py-20 px-4 sm:px-6 lg:px-8">
+      {/* Features - Mobile Optimized */}
+      <section className="bg-brand-bone py-12 md:py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
-                icon: <Leaf className="w-8 h-8" />,
+                icon: <Leaf className="w-6 h-6" />,
                 title: 'Sustainable',
-                desc: '100% organic cotton and eco-friendly production methods.',
+                desc: 'Organic cotton & eco-friendly production.',
               },
               {
-                icon: <Truck className="w-8 h-8" />,
+                icon: <Truck className="w-6 h-6" />,
                 title: 'Free Shipping',
-                desc: 'Free shipping on all orders over $75. Fast delivery.',
+                desc: 'On orders over $75. Fast delivery.',
               },
               {
-                icon: <RefreshCw className="w-8 h-8" />,
+                icon: <RefreshCw className="w-6 h-6" />,
                 title: 'Easy Returns',
-                desc: '30-day hassle-free returns. Your satisfaction guaranteed.',
+                desc: '30-day hassle-free returns.',
               },
             ].map((feature, i) => (
-              <div key={i} className="text-center p-8 bg-white rounded-2xl">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-originl-terracotta/10 text-originl-terracotta rounded-full mb-4">
+              <div key={i} className="bg-white rounded-2xl p-5 text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-brand-ember/10 text-brand-ember rounded-xl mb-3">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-originl-black mb-2">{feature.title}</h3>
-                <p className="text-originl-warmGray">{feature.desc}</p>
+                <h3 className="font-bold text-brand-midnight">{feature.title}</h3>
+                <p className="text-sm text-brand-mist mt-1">{feature.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-originl-cream">
-        <div className="max-w-2xl mx-auto text-center">
-          <span className="text-originl-terracotta text-sm font-semibold tracking-widest uppercase">
-            Stay Connected
-          </span>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-originl-black mt-3 mb-4">
-            JOIN THE MOVEMENT
+      {/* Newsletter - Mobile Optimized */}
+      <section className="py-12 md:py-20 px-4 bg-brand-ivory">
+        <div className="max-w-xl mx-auto text-center">
+          <h2 className="section-title text-2xl md:text-4xl text-brand-midnight mb-3">
+            Join the Movement
           </h2>
-          <p className="text-originl-charcoal/70 mb-8">
-            Be the first to know about new drops, exclusive offers, and behind-the-scenes content.
+          <p className="text-brand-mist mb-6 text-sm md:text-base">
+            Get early access to drops, exclusive offers, and more.
           </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <form className="flex flex-col sm:flex-row gap-2">
             <input
               type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-6 py-4 border-2 border-originl-sand bg-white rounded-xl focus:border-originl-terracotta transition-colors"
+              placeholder="Your email"
+              className="flex-1 px-4 py-3 border-2 border-brand-bone rounded-xl bg-white focus:border-brand-ember transition-colors text-sm"
               required
             />
-            <button
-              type="submit"
-              className="btn-primary whitespace-nowrap"
-            >
+            <button type="submit" className="btn-primary text-sm">
               Subscribe
             </button>
           </form>
-          <p className="text-sm text-originl-warmGray mt-4">
-            No spam, ever. Unsubscribe anytime. 🔒
-          </p>
+          <p className="text-xs text-brand-mist mt-3">No spam. Unsubscribe anytime.</p>
         </div>
       </section>
     </>

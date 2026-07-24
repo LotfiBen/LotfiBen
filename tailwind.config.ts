@@ -9,23 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        originl: {
-          black: '#0a0a0a',
-          cream: '#f5f0e8',
-          terracotta: '#c45c3e',
-          sage: '#8a9a7b',
-          charcoal: '#2d2d2d',
-          warmGray: '#a8a29e',
-          sand: '#e8e0d5',
+        brand: {
+          midnight: '#0f0f0f',
+          ivory: '#faf8f5',
+          ember: '#e54d2e',
+          slate: '#1d1d1f',
+          mist: '#86868b',
+          bone: '#f0ede8',
+          peach: '#ff8c6b',
         },
       },
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        display: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
       },
-      animation: {
-        'fade-in': 'fadeIn 0.6s ease-out forwards',
-        'slide-up': 'slideUp 0.8s ease-out forwards',
-        'pulse-slow': 'pulse 3s ease-in-out infinite',
+      spacing: {
+        'safe-bottom': 'env(safe-area-inset-bottom)',
       },
     },
   },

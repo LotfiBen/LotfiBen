@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useCart } from '@/lib/cart-context';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
-import { ChevronRight, Check, Heart, Share2 } from 'lucide-react';
+import { ChevronRight, Check, Heart, Share2, ArrowLeft } from 'lucide-react';
 import { Suspense } from 'react';
 
 function ProductDetailContent() {
@@ -21,12 +21,9 @@ function ProductDetailContent() {
 
   if (!product) {
     return (
-      <div className="pt-24 pb-16 px-4 max-w-7xl mx-auto text-center bg-originl-cream min-h-screen">
-        <div className="w-24 h-24 bg-originl-sand rounded-full flex items-center justify-center mx-auto mb-6">
-          <span className="text-4xl">😕</span>
-        </div>
-        <h1 className="text-3xl font-bold text-originl-black mb-4">Product Not Found</h1>
-        <Link href="/products" className="btn-primary inline-block mt-4">
+      <div className="pt-20 pb-16 px-4 text-center bg-brand-ivory min-h-screen">
+        <h1 className="text-2xl font-bold text-brand-midnight">Product Not Found</h1>
+        <Link href="/products" className="btn-primary inline-block mt-4 text-sm">
           Back to Shop
         </Link>
       </div>
@@ -42,177 +39,147 @@ function ProductDetailContent() {
     .slice(0, 4);
 
   return (
-    <div className="pt-20 bg-originl-cream min-h-screen">
-      {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <nav className="flex items-center text-sm text-originl-warmGray">
-          <Link href="/" className="hover:text-originl-terracotta transition-colors">Home</Link>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <Link href="/products" className="hover:text-originl-terracotta transition-colors">Shop</Link>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <span className="text-originl-black">{product.name}</span>
-        </nav>
+    <div className="pt-16 bg-brand-ivory min-h-screen">
+      {/* Mobile Back Button */}
+      <div className="px-4 py-3 border-b border-brand-bone">
+        <Link href="/products" className="inline-flex items-center gap-1 text-sm text-brand-mist hover:text-brand-midnight">
+          <ArrowLeft className="w-4 h-4" />
+          Back to Shop
+        </Link>
       </div>
 
-      {/* Product Detail */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Images */}
-          <div className="space-y-4">
-            <div className="bg-originl-sand aspect-square relative overflow-hidden rounded-3xl">
-              <Image
-                src={product.images[selectedImage]}
-                alt={product.name}
-                fill
-                className="object-cover"
-                priority
-              />
+      <div className="px-4 py-6 pb-16">
+        {/* Images */}
+        <div className="space-y-3">
+          <div className="bg-brand-bone aspect-square relative overflow-hidden rounded-2xl">
+            <Image
+              src={product.images[selectedImage]}
+              alt={product.name}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+          {product.images.length > 1 && (
+            <div className="flex gap-2">
+              {product.images.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedImage(idx)}
+                  className={`w-16 h-16 bg-brand-bone relative overflow-hidden rounded-lg border-2 transition-all ${
+                    selectedImage === idx ? 'border-brand-ember' : 'border-transparent'
+                  }`}
+                >
+                  <Image src={img} alt={`View ${idx + 1}`} fill className="object-cover" />
+                </button>
+              ))}
             </div>
-            {product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
-                {product.images.map((img, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setSelectedImage(idx)}
-                    className={`bg-originl-sand aspect-square relative overflow-hidden rounded-xl border-2 transition-all ${
-                      selectedImage === idx ? 'border-originl-terracotta' : 'border-transparent hover:border-originl-warmGray'
-                    }`}
-                  >
-                    <Image
-                      src={img}
-                      alt={`${product.name} view ${idx + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
+          )}
+        </div>
+
+        {/* Product Info */}
+        <div className="mt-6">
+          <span className="category-pill rounded-full">{product.category.replace('-', ' ')}</span>
+          
+          <h1 className="section-title text-2xl md:text-3xl text-brand-midnight mt-3">
+            {product.name}
+          </h1>
+          
+          <p className="price text-2xl mt-2">${product.price.toFixed(2)}</p>
+          
+          <p className="text-brand-mist text-sm mt-4 leading-relaxed">
+            {product.description}
+          </p>
+
+          {/* Color Selection */}
+          <div className="mt-6">
+            <p className="text-sm font-semibold text-brand-midnight mb-2">
+              Color: <span className="font-normal text-brand-mist">{selectedColor}</span>
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {product.colors.map(color => (
+                <button
+                  key={color}
+                  onClick={() => setSelectedColor(color)}
+                  className={`px-4 py-2 text-xs font-semibold rounded-full border-2 transition-all ${
+                    selectedColor === color
+                      ? 'border-brand-ember bg-brand-ember text-white'
+                      : 'border-brand-bone bg-white hover:border-brand-mist'
+                  }`}
+                >
+                  {color}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Info */}
-          <div className="lg:sticky lg:top-24 h-fit">
-            <div className="space-y-6">
-              {/* Category Badge */}
-              <div>
-                <span className="bg-originl-terracotta/10 text-originl-terracotta px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full">
-                  {product.category.replace('-', ' ')}
-                </span>
-              </div>
-
-              <div>
-                <h1 className="text-3xl md:text-4xl font-black tracking-tight text-originl-black">
-                  {product.name}
-                </h1>
-              </div>
-
-              <p className="text-3xl font-bold text-originl-terracotta">${product.price.toFixed(2)}</p>
-
-              <p className="text-originl-charcoal/80 leading-relaxed">{product.description}</p>
-
-              {/* Color Selection */}
-              <div>
-                <p className="text-sm font-semibold mb-3 text-originl-black">
-                  COLOR: <span className="text-originl-warmGray font-normal">{selectedColor}</span>
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {product.colors.map(color => (
-                    <button
-                      key={color}
-                      onClick={() => setSelectedColor(color)}
-                      className={`px-5 py-2 text-sm font-medium rounded-full border-2 transition-all ${
-                        selectedColor === color
-                          ? 'border-originl-terracotta bg-originl-terracotta text-white'
-                          : 'border-originl-sand bg-white hover:border-originl-warmGray'
-                      }`}
-                    >
-                      {color}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Size Selection */}
-              <div>
-                <div className="flex justify-between items-center mb-3">
-                  <p className="text-sm font-semibold text-originl-black">
-                    SIZE: <span className="text-originl-warmGray font-normal">{selectedSize}</span>
-                  </p>
-                  <button className="text-sm text-originl-terracotta hover:underline">
-                    Size Guide
-                  </button>
-                </div>
-                <div className="grid grid-cols-6 gap-2">
-                  {product.sizes.map(size => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`py-3 text-sm font-semibold rounded-xl border-2 transition-all ${
-                        selectedSize === size
-                          ? 'border-originl-terracotta bg-originl-terracotta text-white'
-                          : 'border-originl-sand bg-white hover:border-originl-warmGray text-originl-black'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Add to Cart */}
-              <button
-                onClick={handleAddToCart}
-                className="w-full btn-primary flex items-center justify-center gap-2 text-lg"
-              >
-                <Check className="w-5 h-5" />
-                ADD TO CART
-              </button>
-
-              {/* Action buttons */}
-              <div className="flex gap-4">
-                <button className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-originl-sand rounded-xl hover:bg-originl-sand transition-colors">
-                  <Heart className="w-5 h-5" />
-                  <span className="text-sm font-semibold">Wishlist</span>
-                </button>
-                <button className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-originl-sand rounded-xl hover:bg-originl-sand transition-colors">
-                  <Share2 className="w-5 h-5" />
-                  <span className="text-sm font-semibold">Share</span>
-                </button>
-              </div>
-
-              {/* Additional Info */}
-              <div className="border-t border-originl-sand pt-6 space-y-3 text-sm">
-                <p className="flex items-center gap-3 text-originl-charcoal">
-                  <Check className="w-5 h-5 text-originl-sage" />
-                  Free shipping on orders over $75
-                </p>
-                <p className="flex items-center gap-3 text-originl-charcoal">
-                  <Check className="w-5 h-5 text-originl-sage" />
-                  100% premium organic cotton
-                </p>
-                <p className="flex items-center gap-3 text-originl-charcoal">
-                  <Check className="w-5 h-5 text-originl-sage" />
-                  Easy 30-day returns
-                </p>
-                <p className="flex items-center gap-3 text-originl-charcoal">
-                  <Check className="w-5 h-5 text-originl-sage" />
-                  Ethically made & sustainable
-                </p>
-              </div>
+          {/* Size Selection */}
+          <div className="mt-6">
+            <div className="flex justify-between items-center mb-2">
+              <p className="text-sm font-semibold text-brand-midnight">
+                Size: <span className="font-normal text-brand-mist">{selectedSize}</span>
+              </p>
+              <button className="text-xs text-brand-ember underline">Size Guide</button>
             </div>
+            <div className="grid grid-cols-4 gap-2">
+              {product.sizes.map(size => (
+                <button
+                  key={size}
+                  onClick={() => setSelectedSize(size)}
+                  className={`py-3 text-sm font-bold rounded-xl border-2 transition-all ${
+                    selectedSize === size
+                      ? 'border-brand-ember bg-brand-ember text-white'
+                      : 'border-brand-bone bg-white text-brand-midnight hover:border-brand-mist'
+                  }`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Add to Cart */}
+          <button
+            onClick={handleAddToCart}
+            className="w-full btn-primary mt-6 text-sm"
+          >
+            Add to Cart
+          </button>
+
+          {/* Wishlist & Share */}
+          <div className="flex gap-3 mt-3">
+            <button className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-brand-bone rounded-xl text-sm font-semibold hover:bg-brand-bone transition-colors">
+              <Heart className="w-4 h-4" />
+              Wishlist
+            </button>
+            <button className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-brand-bone rounded-xl text-sm font-semibold hover:bg-brand-bone transition-colors">
+              <Share2 className="w-4 h-4" />
+              Share
+            </button>
+          </div>
+
+          {/* Features */}
+          <div className="mt-6 space-y-2 text-sm">
+            <p className="flex items-center gap-2 text-brand-mist">
+              <Check className="w-4 h-4 text-green-500" />
+              Free shipping on orders over $75
+            </p>
+            <p className="flex items-center gap-2 text-brand-mist">
+              <Check className="w-4 h-4 text-green-500" />
+              100% organic cotton
+            </p>
+            <p className="flex items-center gap-2 text-brand-mist">
+              <Check className="w-4 h-4 text-green-500" />
+              30-day easy returns
+            </p>
           </div>
         </div>
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="mt-24">
-            <div className="text-center mb-12">
-              <span className="text-originl-terracotta text-sm font-semibold tracking-widest uppercase">
-                You May Also Like
-              </span>
-              <h2 className="text-3xl font-black text-originl-black mt-2">RELATED PRODUCTS</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 stagger-children">
+          <div className="mt-10">
+            <h2 className="section-title text-xl text-brand-midnight mb-4">You May Also Like</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {relatedProducts.map((p, index) => (
                 <ProductCard key={p.id} product={p} index={index} />
               ))}
@@ -227,18 +194,10 @@ function ProductDetailContent() {
 export default function ProductDetailPage() {
   return (
     <Suspense fallback={
-      <div className="pt-24 pb-16 px-4 bg-originl-cream min-h-screen">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="bg-originl-sand aspect-square rounded-3xl animate-pulse" />
-            <div className="space-y-4">
-              <div className="h-4 bg-originl-sand rounded w-1/4 animate-pulse" />
-              <div className="h-10 bg-originl-sand rounded w-3/4 animate-pulse" />
-              <div className="h-6 bg-originl-sand rounded w-1/4 animate-pulse" />
-              <div className="h-24 bg-originl-sand rounded animate-pulse" />
-            </div>
-          </div>
-        </div>
+      <div className="pt-20 bg-brand-ivory min-h-screen p-4">
+        <div className="skeleton aspect-square rounded-2xl" />
+        <div className="mt-4 h-8 bg-brand-bone rounded w-3/4" />
+        <div className="mt-2 h-6 bg-brand-bone rounded w-1/4" />
       </div>
     }>
       <ProductDetailContent />

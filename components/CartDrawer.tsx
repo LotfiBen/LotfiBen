@@ -14,21 +14,21 @@ export default function CartDrawer() {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-originl-black/50 z-50 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/50 z-50"
         onClick={() => setIsCartOpen(false)}
       />
 
-      {/* Drawer */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 shadow-2xl flex flex-col">
+      {/* Drawer - Full height, mobile friendly */}
+      <div className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white z-50 shadow-2xl flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-originl-sand">
+        <div className="flex items-center justify-between p-4 border-b border-brand-bone">
           <div>
-            <h2 className="text-xl font-bold text-originl-black">YOUR CART</h2>
-            <p className="text-sm text-originl-warmGray">{items.length} {items.length === 1 ? 'item' : 'items'}</p>
+            <h2 className="text-lg font-bold text-brand-midnight">Your Cart</h2>
+            <p className="text-xs text-brand-mist">{items.length} {items.length === 1 ? 'item' : 'items'}</p>
           </div>
           <button
             onClick={() => setIsCartOpen(false)}
-            className="p-2 hover:bg-originl-sand rounded-full transition-colors"
+            className="p-2 hover:bg-brand-bone rounded-full transition-colors"
             aria-label="Close cart"
           >
             <X className="w-6 h-6" />
@@ -36,62 +36,48 @@ export default function CartDrawer() {
         </div>
 
         {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-4">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
-              <div className="w-24 h-24 bg-originl-sand rounded-full flex items-center justify-center mb-6">
-                <ShoppingBag className="w-10 h-10 text-originl-warmGray" />
+              <div className="w-20 h-20 bg-brand-bone rounded-full flex items-center justify-center mb-4">
+                <ShoppingBag className="w-8 h-8 text-brand-mist" />
               </div>
-              <p className="text-originl-charcoal/70 mb-2">Your cart is empty</p>
-              <p className="text-sm text-originl-warmGray mb-6">Add some items to get started!</p>
-              <button
-                onClick={() => setIsCartOpen(false)}
-                className="btn-primary text-sm"
-              >
+              <p className="text-brand-slate font-semibold">Your cart is empty</p>
+              <p className="text-sm text-brand-mist mt-1 mb-4">Add some items to get started!</p>
+              <button onClick={() => setIsCartOpen(false)} className="btn-primary text-sm">
                 Start Shopping
               </button>
             </div>
           ) : (
-            <div className="space-y-6">
+            <div className="space-y-4">
               {items.map((item, index) => (
-                <div key={`${item.id}-${item.selectedColor}-${item.selectedSize}-${index}`} className="flex gap-4">
-                  <div className="relative w-24 h-24 bg-originl-sand rounded-xl overflow-hidden flex-shrink-0">
-                    <Image
-                      src={item.images[0]}
-                      alt={item.name}
-                      fill
-                      className="object-cover"
-                    />
+                <div key={`${item.id}-${item.selectedColor}-${item.selectedSize}-${index}`} className="flex gap-3 pb-4 border-b border-brand-bone">
+                  <div className="w-20 h-20 bg-brand-bone rounded-xl overflow-hidden flex-shrink-0 relative">
+                    <Image src={item.images[0]} alt={item.name} fill className="object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-originl-black truncate">{item.name}</h3>
-                    <p className="text-sm text-originl-warmGray">
-                      {item.selectedColor} / {item.selectedSize}
-                    </p>
-                    <p className="price-tag mt-1">${item.price.toFixed(2)}</p>
-
-                    <div className="flex items-center gap-4 mt-3">
-                      <div className="flex items-center border border-originl-sand rounded-lg">
+                    <h3 className="font-semibold text-sm text-brand-midnight truncate">{item.name}</h3>
+                    <p className="text-xs text-brand-mist">{item.selectedColor} / {item.selectedSize}</p>
+                    <p className="price text-sm mt-1">${item.price.toFixed(2)}</p>
+                    <div className="flex items-center justify-between mt-2">
+                      <div className="flex items-center border border-brand-bone rounded-lg">
                         <button
                           onClick={() => updateQuantity(item.id, item.selectedColor, item.selectedSize, item.quantity - 1)}
-                          className="p-2 hover:bg-originl-sand transition-colors"
-                          aria-label="Decrease quantity"
+                          className="p-1.5 hover:bg-brand-bone transition-colors"
                         >
-                          <Minus className="w-4 h-4" />
+                          <Minus className="w-3 h-3" />
                         </button>
-                        <span className="px-4 py-1 text-sm font-semibold">{item.quantity}</span>
+                        <span className="px-3 text-sm font-semibold">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(item.id, item.selectedColor, item.selectedSize, item.quantity + 1)}
-                          className="p-2 hover:bg-originl-sand transition-colors"
-                          aria-label="Increase quantity"
+                          className="p-1.5 hover:bg-brand-bone transition-colors"
                         >
-                          <Plus className="w-4 h-4" />
+                          <Plus className="w-3 h-3" />
                         </button>
                       </div>
                       <button
                         onClick={() => removeFromCart(item.id, item.selectedColor, item.selectedSize)}
-                        className="text-originl-warmGray hover:text-originl-terracotta transition-colors"
-                        aria-label="Remove item"
+                        className="p-1 text-brand-mist hover:text-brand-ember transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -103,26 +89,26 @@ export default function CartDrawer() {
           )}
         </div>
 
-        {/* Footer */}
+        {/* Footer - Sticky bottom */}
         {items.length > 0 && (
-          <div className="border-t border-originl-sand p-6 space-y-4 bg-originl-cream">
-            <div className="flex justify-between items-center">
-              <span className="text-originl-charcoal">Subtotal</span>
-              <span className="text-xl font-bold text-originl-black">${cartTotal.toFixed(2)}</span>
+          <div className="p-4 border-t border-brand-bone bg-white">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-brand-slate">Subtotal</span>
+              <span className="font-bold text-lg text-brand-midnight">${cartTotal.toFixed(2)}</span>
             </div>
-            <p className="text-sm text-originl-warmGray">
+            <p className="text-xs text-brand-mist mb-3">
               {cartTotal >= 75 ? '✓ Free shipping applied!' : `Add $${(75 - cartTotal).toFixed(2)} more for free shipping`}
             </p>
             <Link
               href="/checkout"
               onClick={() => setIsCartOpen(false)}
-              className="block w-full btn-primary text-center"
+              className="block w-full btn-primary text-center text-sm"
             >
               Checkout
             </Link>
             <button
               onClick={() => setIsCartOpen(false)}
-              className="block w-full py-3 text-sm font-semibold tracking-wide hover:bg-originl-sand transition-colors rounded-lg"
+              className="w-full py-3 text-sm font-semibold text-brand-mist hover:bg-brand-bone transition-colors mt-2 rounded-xl"
             >
               Continue Shopping
             </button>
