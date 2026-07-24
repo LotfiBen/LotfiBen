@@ -4,14 +4,14 @@ import { X, Plus, Minus, ShoppingBag, Trash2 } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
 import Link from 'next/link';
 import Image from 'next/image';
-import { formatPrice, getShippingCost } from '@/lib/settings';
+import { storeSettings, formatPrice, getShippingCost, calculateTotal } from '@/lib/settings';
 
 export default function CartDrawer() {
   const { items, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, cartTotal } = useCart();
 
   if (!isCartOpen) return null;
 
-  const shipping = getShippingCost(cartTotal);
+  const totals = calculateTotal(cartTotal);
 
   return (
     <>
@@ -97,29 +97,47 @@ export default function CartDrawer() {
           <div className="p-4 border-t border-brand-bone bg-white">
             <div className="flex justify-between items-center mb-2">
               <span className="text-brand-slate">Sous-total</span>
-              <span className="font-bold text-lg text-brand-midnight">{formatPrice(cartTotal)}</span>
+              <span className="font-bold text-lg text-brand-midnight">{formatPrice(totals.subtotalUSD)}</span>
             </div>
             <div className="flex justify-between items-center mb-2">
               <span className="text-brand-slate text-sm">Livraison</span>
-              <span className={`font-semibold text-sm ${shipping.isFree ? 'text-green-600' : 'text-brand-midnight'}`}>
-                {shipping.display}
+              <span className={`font-semibold text-sm ${totals.isFreeShipping ? 'text-green-600' : 'text-brand-midnight'}`}>
+                {totals.isFreeShipping ? 'Gratuit' : `${storeSettings.defaultShippingCost.toLocaleString('fr-DZ')} ${storeSettings.currencySymbol}`}
               </span>
             </div>
-            <p className="text-xs text-brand-mist mb-3">
-              {shipping.isFree ? '✓ Livraison gratuite appliquée!' : `Ajoutez ${formatPrice(10000 / 135 - cartTotal)} pour livraison gratuite`}
-            </p>
+            
+            {/* Free shipping progress */}
+            {!totals.isFreeShipping && (
+              <div className="mb-3">
+                <p className="text-xs text-brand-mist mb-1">
+                  Plus que {formatPrice((storeSettings.freeShippingThreshold / storeSettings.currencyConversionRate) - cartTotal)} pour livraison gratuite!
+                </p>
+                <div className="w-full h-2 bg-brand-bone rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-brand-ember rounded-full transition-all"
+                    style={{ width: `${Math.min((cartTotal / (storeSettings.freeShippingThreshold / storeSettings.currencyConversionRate)) * 100, 100)}%` }}
+                  />
+                </div>
+              </div>
+            )}
+            
+            <div className="flex justify-between items-center py-2 border-t border-brand-bone mt-2">
+              <span className="font-bold text-brand-midnight">Total</span>
+              <span className="font-bold text-xl price">{formatPrice(totals.totalUSD)}</span>
+            </div>
+            
             <Link
               href="/checkout"
               onClick={() => setIsCartOpen(false)}
-              className="block w-full btn-primary text-center text-sm"
+              className="block w-full btn-primary text-center text-sm mt-4"
             >
-              Commander
+              Commander - {formatPrice(totals.totalUSD)}
             </Link>
             <button
               onClick={() => setIsCartOpen(false)}
               className="w-full py-3 text-sm font-semibold text-brand-mist hover:bg-brand-bone transition-colors mt-2 rounded-xl"
             >
-              Continuer shopping
+              continuer shopping
             </button>
           </div>
         )}

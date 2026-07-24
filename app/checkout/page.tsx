@@ -4,7 +4,7 @@ import { useCart } from '@/lib/cart-context';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Lock } from 'lucide-react';
-import { formatPrice, getShippingCost, storeSettings } from '@/lib/settings';
+import { storeSettings, formatPrice, calculateTotal } from '@/lib/settings';
 
 export default function CheckoutPage() {
   const { items, cartTotal, clearCart } = useCart();
@@ -14,8 +14,7 @@ export default function CheckoutPage() {
     clearCart();
   };
 
-  const shipping = getShippingCost(cartTotal);
-  const total = cartTotal + (shipping.isFree ? 0 : storeSettings.defaultShippingCost);
+  const totals = calculateTotal(cartTotal);
 
   if (items.length === 0) {
     return (
@@ -38,7 +37,7 @@ export default function CheckoutPage() {
         <div className="max-w-7xl mx-auto">
           <Link href="/products" className="inline-flex items-center gap-2 text-sm mb-4 text-brand-mist hover:text-white">
             <ArrowLeft className="w-4 h-4" />
-            Continuer shopping
+            continuer shopping
           </Link>
           <h1 className="section-title text-3xl md:text-4xl">
             <span className="text-white">COMMAN</span>
@@ -58,6 +57,7 @@ export default function CheckoutPage() {
                 Informations
               </h2>
               <input type="email" placeholder="Email" className="w-full px-4 py-3 border-2 border-brand-bone rounded-xl focus:border-brand-ember text-sm" required />
+              <input type="tel" placeholder="Téléphone (Obligatoire)" className="w-full mt-2 px-4 py-3 border-2 border-brand-bone rounded-xl focus:border-brand-ember text-sm" required />
             </div>
 
             {/* Shipping */}
@@ -70,8 +70,7 @@ export default function CheckoutPage() {
                 <input type="text" placeholder="Prénom" className="px-4 py-3 border-2 border-brand-bone rounded-xl focus:border-brand-ember text-sm" required />
                 <input type="text" placeholder="Nom" className="px-4 py-3 border-2 border-brand-bone rounded-xl focus:border-brand-ember text-sm" required />
               </div>
-              <input type="tel" placeholder="Téléphone (Obligatoire)" className="w-full mt-2 px-4 py-3 border-2 border-brand-bone rounded-xl focus:border-brand-ember text-sm" required />
-              <input type="text" placeholder="Adresse" className="w-full mt-2 px-4 py-3 border-2 border-brand-bone rounded-xl focus:border-brand-ember text-sm" required />
+              <input type="text" placeholder="Adresse complète" className="w-full mt-2 px-4 py-3 border-2 border-brand-bone rounded-xl focus:border-brand-ember text-sm" required />
               <div className="grid grid-cols-2 gap-2 mt-2">
                 <input type="text" placeholder="Ville" className="px-4 py-3 border-2 border-brand-bone rounded-xl focus:border-brand-ember text-sm" required />
                 <input type="text" placeholder="Code Postal" className="px-4 py-3 border-2 border-brand-bone rounded-xl focus:border-brand-ember text-sm" />
@@ -90,15 +89,15 @@ export default function CheckoutPage() {
               <div className="space-y-2 mb-3">
                 <label className="flex items-center gap-2 p-3 border-2 border-brand-bone rounded-xl cursor-pointer hover:border-brand-ember transition-colors">
                   <input type="radio" name="payment" value="cod" defaultChecked className="accent-brand-ember" />
-                  <span className="text-sm font-medium">Paiement à la livraison (COD)</span>
+                  <span className="text-sm font-medium">💵 Paiement à la livraison (COD)</span>
                 </label>
                 <label className="flex items-center gap-2 p-3 border-2 border-brand-bone rounded-xl cursor-pointer hover:border-brand-ember transition-colors">
                   <input type="radio" name="payment" value="ccp" className="accent-brand-ember" />
-                  <span className="text-sm font-medium">CCP / BaridiMob</span>
+                  <span className="text-sm font-medium">🏦 CCP / BaridiMob</span>
                 </label>
                 <label className="flex items-center gap-2 p-3 border-2 border-brand-bone rounded-xl cursor-pointer hover:border-brand-ember transition-colors">
                   <input type="radio" name="payment" value="edahabia" className="accent-brand-ember" />
-                  <span className="text-sm font-medium">Edahabia</span>
+                  <span className="text-sm font-medium">💳 Edahabia</span>
                 </label>
               </div>
               <div className="flex items-center gap-2 text-xs text-brand-mist">
@@ -108,7 +107,7 @@ export default function CheckoutPage() {
             </div>
 
             <button onClick={handlePlaceOrder} className="w-full btn-primary text-sm py-4">
-              Confirmer la commande - {formatPrice(total)}
+              Confirmer - {formatPrice(totals.totalUSD)}
             </button>
             
             <p className="text-xs text-center text-brand-mist">
@@ -131,6 +130,7 @@ export default function CheckoutPage() {
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-xs text-brand-midnight truncate">{item.name}</h3>
                     <p className="text-xs text-brand-mist">{item.selectedColor} / {item.selectedSize}</p>
+                    <p className="text-xs text-brand-mist">x{item.quantity}</p>
                   </div>
                   <p className="font-bold text-sm">{formatPrice(item.price * item.quantity)}</p>
                 </div>
@@ -140,17 +140,17 @@ export default function CheckoutPage() {
             <div className="border-t border-brand-bone mt-4 pt-4 space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-brand-mist">Sous-total</span>
-                <span className="font-semibold">{formatPrice(cartTotal)}</span>
+                <span className="font-semibold">{formatPrice(totals.subtotalUSD)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-brand-mist">Livraison</span>
-                <span className={`font-semibold ${shipping.isFree ? 'text-green-600' : ''}`}>
-                  {shipping.display}
+                <span className={`font-semibold ${totals.isFreeShipping ? 'text-green-600' : ''}`}>
+                  {totals.isFreeShipping ? 'Gratuit' : `${storeSettings.defaultShippingCost.toLocaleString('fr-DZ')} ${storeSettings.currencySymbol}`}
                 </span>
               </div>
               <div className="flex justify-between font-bold text-lg pt-2 border-t border-brand-bone">
                 <span>Total</span>
-                <span className="price">{formatPrice(total)}</span>
+                <span className="price">{formatPrice(totals.totalUSD)}</span>
               </div>
             </div>
             
@@ -160,6 +160,13 @@ export default function CheckoutPage() {
               <p>Standard: {storeSettings.standardDelivery}</p>
               <p>Express: {storeSettings.expressDelivery}</p>
             </div>
+            
+            {/* Free shipping badge */}
+            {totals.isFreeShipping && (
+              <div className="mt-3 p-3 bg-green-100 rounded-lg text-xs text-green-700 text-center font-semibold">
+                ✓ Livraison gratuite appliquée!
+              </div>
+            )}
           </div>
         </div>
       </div>
